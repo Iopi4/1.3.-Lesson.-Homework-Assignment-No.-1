@@ -24,11 +24,11 @@ fun main() {
 
 fun agoToText(person: Person): String {
     val result = when {
-        person.seconds in 0..60 -> "${person.name} был(а) только что"
-        person.seconds in 61..60 * 60 -> "${person.name} был(а) ${correctWordFormatMinutes(person.seconds/60)}"
-        person.seconds in 3600 + 1..3600 * 24 -> "${person.name} был(а) ${correctWordFormatHours(person.seconds/3600)}"
-        person.seconds in 3600 * 24 + 1..3600 * 24 * 2 -> "${person.name} был(а) вчера"
-        person.seconds in 3600 * 24 * 2 + 1..3600 * 24 * 3   -> "${person.name} был(а) позавчера"
+        person.seconds < 61 -> "${person.name} был(а) только что"
+        person.seconds < 60 * 60 + 1 -> "${person.name} был(а) ${correctWordFormatMinutes(person.seconds/60)}"
+        person.seconds < 3600 * 24 + 1 -> "${person.name} был(а) ${correctWordFormatHours(person.seconds/3600)}"
+        person.seconds < 3600 * 24 * 2 + 1 -> "${person.name} был(а) вчера"
+        person.seconds < 3600 * 24 * 3 + 1 -> "${person.name} был(а) позавчера"
         else -> "${person.name} был(а) давно"
     }
     return result
